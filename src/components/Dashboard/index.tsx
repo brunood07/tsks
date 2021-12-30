@@ -1,14 +1,16 @@
 import { Summary } from "../Summary";
+import { TodoTable } from "../TodoTable";
 
 import styles from "./styles.module.scss";
 
 export function Dashboard() {
   return (
     <>
-      <div className={styles.container}>
-        <strong>Hi there.</strong>
+      <main className={styles.container}>
+        <h1>Hi there.</h1>
         <Summary />
-      </div>
+        <TodoTable />
+      </main>
     </>
   );
 }

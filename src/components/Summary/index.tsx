@@ -9,7 +9,6 @@ export function Summary() {
       <button>
         Closed
       </button>
-
     </div>
   );
 }
