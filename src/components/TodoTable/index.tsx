@@ -1,20 +1,35 @@
+import { useTodo } from "../../hooks/useTodo";
 import styles from "./styles.module.scss";
 
 export function TodoTable() {
+  const { todos } = useTodo();
+
   return (
-    <div className={styles.todoContainer}>
-      <div className={styles.headerContent}>
-        <div></div>
-        <p>Create Sign In validation</p>
-        <a>...</a>
-      </div>
-      <div className={styles.bodyContent}>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultricies eget neque, libero, massa morbi aliquam ornare. Et tristique sit faucibus suspendisse massa sit turpis vitae. Aliquam eget ipsum ut viverra est porta. Odio velit et, egestas in netus. Porttitor amet erat scelerisque aenean enim tortor, gravida quisque. Egestas dui non commodo phasellus nibh volutpat nulla in. 
-        </p>
-      </div>
-      <div className={styles.footerContent}>
-        <p>Created March 30, 2021 1:24pm</p>
-      </div>
-    </div>
+    <>
+      {todos.length > 0 ? todos.map(todo => (
+        <div className={styles.todoContainer} key={todo.id}>
+          <div className={styles.headerContent}>
+            <div></div>
+            <p>{todo.title}</p>
+            <a>...</a>
+          </div>
+          <div className={styles.bodyContent}>
+            <p>
+              {todo.description} 
+            </p>
+          </div>
+          <div className={styles.footerContent}>
+            <p>Created {new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' }).format(new Date(todo.created_at))}</p>
+          </div>
+        </div>
+      )) : 
+      (
+        <div className={styles.noTasksContainer}>
+          <span className={styles.noTasks}>
+            No Tasks
+          </span>
+        </div>
+      )}
+    </>
   );
 }

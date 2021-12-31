@@ -4,6 +4,7 @@ import { Dashboard } from "./components/Dashboard";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { NewTodoModal } from "./components/NewTodoModal";
+import { TodoProvider } from "./hooks/useTodo";
 
 import "./styles/global.scss";
 
@@ -19,12 +20,12 @@ function App() {
   }
 
   return (
-    <>
+    <TodoProvider>
       <Header onOpenNewTodoModal={handleOpenNewTodoModal} />
       <Dashboard />
       <NewTodoModal isOpen={isNewTodoModalOpen} onRequestClose={handleClosenNewTodoModal} />
       <Footer />
-    </>
+    </ TodoProvider>
   );
 }
 

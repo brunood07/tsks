@@ -32,6 +32,7 @@
     height: 14.625rem;
     border-radius: 1.25rem;
     margin-top: 1.25rem;
+    padding: 1rem 0 0 1.5rem;
     border: 0;
 
     background: var(--gray-850);
@@ -42,11 +43,6 @@
 
     &::placeholder {
       color: #777777;
-      padding: 1rem 0 0 0.5rem;
-    }
-
-    &::content {
-      padding-top: 1.25rem;
     }
 
     resize: none;

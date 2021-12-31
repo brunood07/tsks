@@ -57,3 +57,15 @@
   border-bottom-left-radius: 1.25rem;
   border-bottom-right-radius: 1.25rem;
 }
+
+.noTasksContainer {
+  width: 100%;
+  margin-top: 4.6875rem;
+  padding-bottom: 15rem;
+}
+
+.noTasks {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--purple);
+}

@@ -24,5 +24,9 @@
     &.active {
       background: var(--gray-750);
     }
+
+    &.notActive {
+      background: var(--gray-950);
+    }
   }
 }
