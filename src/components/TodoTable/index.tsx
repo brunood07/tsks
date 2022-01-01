@@ -1,4 +1,6 @@
+import rectangleImg from "../../assets/Rectangle.svg";
 import { useTodo } from "../../hooks/useTodo";
+
 import styles from "./styles.module.scss";
 
 export function TodoTable() {
@@ -9,9 +11,13 @@ export function TodoTable() {
       {todos.length > 0 ? todos.map(todo => (
         <div className={styles.todoContainer} key={todo.id}>
           <div className={styles.headerContent}>
-            <div></div>
+            <img src={rectangleImg} alt="Circle" />
             <p>{todo.title}</p>
-            <a>...</a>
+            <div>
+              <button >
+                ...
+              </button>
+            </div>
           </div>
           <div className={styles.bodyContent}>
             <p>

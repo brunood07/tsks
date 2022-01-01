@@ -14,15 +14,15 @@ createServer({
   //     todos: [
   //       {
   //         id: 1,
-  //         title: "Estudar React",
-  //         description: "Estudar a trilha de React da Rocketseat",
+  //         title: "Finish the assessment",
+  //         description: "Complete the evaluation, to be considered for a position on Outboxup",
   //         isDone: false,
   //         created_at: new Date("2021-12-30 09:00:00")
   //       },
   //       {
   //         id: 2,
-  //         title: "Estudar Node",
-  //         description: "Estudar a trilha de Node da Rocketseat",
+  //         title: "Interview",
+  //         description: "Interview with outboxup",
   //         isDone: false,
   //         created_at: new Date("2021-12-31 09:00:00")
   //       }

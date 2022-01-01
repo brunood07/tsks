@@ -1,9 +1,10 @@
 import { FormEvent, useState } from "react";
 import Modal from "react-modal";
 
-import styles from "./styles.module.scss";
 import closeImg from "../../assets/Close.svg";
 import { useTodo } from "../../hooks/useTodo";
+
+import styles from "./styles.module.scss";
 
 interface NewTodoModalProps {
   isOpen: boolean;

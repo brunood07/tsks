@@ -17,18 +17,21 @@
 
   font-weight: 600;
 
-  div {
-    width: 30px;
-    height: 30px;
-    border-radius: 1.25rem;
-    border: 3px solid var(--purple);
+  p {
+    position: absolute;
+    align-items: center;
+    padding-left: 70px;
   }
 
-  a {
+  button {
+    background: var(--gray-850);
     color: var(--purple);
+    border: 0;
     text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 600;
+
     cursor: pointer;
-    font-weight: bold;
   }
 }
 
