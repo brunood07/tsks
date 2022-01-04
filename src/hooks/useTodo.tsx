@@ -21,6 +21,9 @@ interface TodoProviderProps {
 interface TodoContextData {
   todos: Todo[];
   createTodo: (Todo: TodoInput) => Promise<void>;
+  editingTodo: Todo;
+  updateTodo: (id: number, updatedTodo: TodoInput) => Promise<void>;
+  setCurrentEditingTodo: (id: number) => void;
   deleteTodo: (id: number) => Promise<void>;
 }
 
@@ -30,6 +33,7 @@ const TodoContext = createContext<TodoContextData>(
 
 export function TodoProvider({ children }: TodoProviderProps) {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [editingTodo, setEditingTodo] = useState<Todo>({} as Todo);
 
   useEffect(() => {
     api.get("/todos")
@@ -50,8 +54,26 @@ export function TodoProvider({ children }: TodoProviderProps) {
     ]);
   }
 
+  async function updateTodo(id: number, updatedTodo: TodoInput) {
+    await api.put<Todo>(`/todos/${id}`, updatedTodo);
+
+    const updatedTodos = todos.map(todo => {
+      return todo.id === id
+      ? { ...todo, ...updatedTodo }
+      : todo
+    });
+
+    setTodos(updatedTodos);
+  }
+
+  function setCurrentEditingTodo(id: number) {
+    const editingTodo = todos.find(todo => todo.id === id) ?? ({} as Todo);
+
+    setEditingTodo(editingTodo);
+  }
+
   async function deleteTodo(id: number) {
-    await api.delete(`/todos/${id}`);
+    await api.delete<Todo>(`/todos/${id}`);
 
     const updatedTodos = todos.filter(todo => todo.id !== id);
 
@@ -59,7 +81,14 @@ export function TodoProvider({ children }: TodoProviderProps) {
   }
 
   return (
-    <TodoContext.Provider value={{ todos, createTodo, deleteTodo }}>
+    <TodoContext.Provider value={{ 
+      todos, 
+      createTodo, 
+      updateTodo,
+      editingTodo,
+      setCurrentEditingTodo,
+      deleteTodo 
+    }}>
       {children}
     </TodoContext.Provider>
   );

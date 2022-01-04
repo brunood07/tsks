@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Modal from "react-modal";
 
 import closeImg from "../../assets/Close.svg";
@@ -7,21 +7,26 @@ import { useTodoModal } from "../../hooks/useTodoModal";
 
 import styles from "./styles.module.scss";
 
-export function NewTodoModal() {
-  const { createTodo } = useTodo();
-  const { isNewTodoModalOpen, handleCloseModal } = useTodoModal()
+export function UpdateTodoModal() {
+  const { updateTodo, editingTodo } = useTodo();
+  const { isUpdateTodoModalOpen, handleCloseModal } = useTodoModal();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  useEffect(() => {
+    setTitle(editingTodo.title);
+    setDescription(editingTodo.description);
+  }, [editingTodo]);
+
   function onRequestClose() {
-    handleCloseModal("newTodo");
+    handleCloseModal("updateTodo");
   }
 
-  async function handleCreateNewTodo(event: FormEvent) {
+  async function handleUpdateTodo(event: FormEvent) {
     event.preventDefault();
 
-    await createTodo({
+    await updateTodo(editingTodo.id, {
       title,
       description,
     });
@@ -33,7 +38,7 @@ export function NewTodoModal() {
   
   return (
     <Modal
-      isOpen={isNewTodoModalOpen}
+      isOpen={isUpdateTodoModalOpen}
       onRequestClose={onRequestClose}
       overlayClassName="react-modal-overlay"
       className="react-modal-content"
@@ -49,9 +54,9 @@ export function NewTodoModal() {
 
       <form 
         className={styles.container}
-        onSubmit={handleCreateNewTodo}
+        onSubmit={handleUpdateTodo}
       >
-        <h2>New Task</h2>
+        <h2>Updated</h2>
         <input 
           placeholder="Title"
           value={title}

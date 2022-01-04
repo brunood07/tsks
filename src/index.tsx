@@ -43,6 +43,16 @@ createServer({
       return schema.create("todo", data);
     });
 
+    this.put("/todos/:id", (schema, request) => {
+      const { id: todoId } = request.params;
+
+      const updatedTodo = JSON.parse(request.requestBody);
+
+      schema.db.todos.update(todoId, updatedTodo);
+
+      return {};
+    })
+
     this.delete("/todos/:id", (schema, request) => {
       const { id: todoId } = request.params;
 
