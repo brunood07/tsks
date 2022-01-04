@@ -21,6 +21,7 @@ interface TodoProviderProps {
 interface TodoContextData {
   todos: Todo[];
   createTodo: (Todo: TodoInput) => Promise<void>;
+  deleteTodo: (id: number) => Promise<void>;
 }
 
 const TodoContext = createContext<TodoContextData>(
@@ -49,8 +50,16 @@ export function TodoProvider({ children }: TodoProviderProps) {
     ]);
   }
 
+  async function deleteTodo(id: number) {
+    await api.delete(`/todos/${id}`);
+
+    const updatedTodos = todos.filter(todo => todo.id !== id);
+
+    setTodos(updatedTodos);
+  }
+
   return (
-    <TodoContext.Provider value={{ todos, createTodo }}>
+    <TodoContext.Provider value={{ todos, createTodo, deleteTodo }}>
       {children}
     </TodoContext.Provider>
   );

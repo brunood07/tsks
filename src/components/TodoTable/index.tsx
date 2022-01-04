@@ -4,7 +4,11 @@ import { useTodo } from "../../hooks/useTodo";
 import styles from "./styles.module.scss";
 
 export function TodoTable() {
-  const { todos } = useTodo();
+  const { todos, deleteTodo } = useTodo();
+
+  function handleDeleteTodo(id: number) {
+    deleteTodo(id);
+  }
 
   return (
     <>
@@ -13,10 +17,13 @@ export function TodoTable() {
           <div className={styles.headerContent}>
             <img src={rectangleImg} alt="Circle" />
             <p>{todo.title}</p>
-            <div>
-              <button >
-                ...
-              </button>
+            <div className={styles.dropdown}>
+              <button className={styles.dropdownButton}>...</button>
+              <div className={styles.dropdownContent}>
+                <button>Complete</button>   
+                <button>Update</button>
+                <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
+              </div>
             </div>
           </div>
           <div className={styles.bodyContent}>
